@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الطالب | مستر أحمد رمضان</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@200;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #05080b;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #0a0e14;
+            border-left: 1px solid var(--glass-border);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            right: 0;
+            top: 0;
+        }
+
+        .sidebar-logo {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .sidebar-menu {
+            flex-grow: 1;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            transition: var(--transition);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background: rgba(13, 71, 161, 0.2);
+            color: var(--secondary-color);
+        }
+
+        .menu-item i {
+            font-size: 1.2rem;
+        }
+
+        .logout {
+            margin-top: auto;
+            color: #ff5252;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            margin-right: 280px;
+            padding: 40px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .user-welcome h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .user-welcome p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: 800;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .next-lesson-card {
+            background: linear-gradient(135deg, #0d47a1 0%, #002171 100%);
+            padding: 40px;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .next-lesson-card h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .lesson-info {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-pill {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .progress-section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--secondary-color);
+            width: 65%;
+            box-shadow: 0 0 15px var(--secondary-color);
+        }
+
+        .announcements {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .announcement-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .announcement-item:last-child {
+            border-bottom: none;
+        }
+
+        .announcement-tag {
+            font-size: 0.7rem;
+            background: var(--secondary-color);
+            color: #000;
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        .announcement-title {
+            font-weight: 600;
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">مستر أحمد رمضان</div>
+        <nav class="sidebar-menu">
+            <a href="#" class="menu-item active">
+                <i class="fas fa-th-large"></i>
+                <span>لوحة التحكم</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-play-circle"></i>
+                <span>محاضراتي</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-file-alt"></i>
+                <span>المذكرات</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                <span>نتائج الاختبارات</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-wallet"></i>
+                <span>المحفظة</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span>الإعدادات</span>
+            </a>
+        </nav>
+        <a href="index.html" class="menu-item logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>تسجيل الخروج</span>
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="dashboard-header">
+            <div class="user-welcome">
+                <h1>مرحباً، محمد أحمد</h1>
+                <p>استكمل رحلة تفوقك اليوم في اللغة العربية</p>
+            </div>
+            <div class="user-profile">
+                <span>محمد أحمد</span>
+                <div class="user-avatar">م</div>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="main-stats">
+                <div class="next-lesson-card">
+                    <h2>المحاضرة القادمة</h2>
+                    <p style="font-size: 1.4rem; margin-bottom: 20px;">شرح درس: (كان وأخواتها) - النحو الكامل</p>
+                    <div class="lesson-info">
+                        <span class="info-pill"><i class="far fa-clock"></i> 45 دقيقة</span>
+                        <span class="info-pill"><i class="far fa-calendar"></i> الغد، 7:00 مساءً</span>
+                    </div>
+                    <button class="btn btn-secondary btn-lg">ابدأ المحاضرة الآن</button>
+                    <i class="fas fa-book-reader"
+                        style="position: absolute; bottom: -20px; left: 20px; font-size: 12rem; opacity: 0.1;"></i>
+                </div>
+
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <h3>مدى التقدم في المنهج</h3>
+                        <span>65% مكتمل</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                        <div style="text-align: center;">
+                            <h4 style="color: var(--secondary-color); font-size: 1.5rem;">12</h4>
+                            <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">محاضرة منتهية</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="color: var(--secondary-color); font-size: 1.5rem;">5</h4>
+                            <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">اختبارات مكتملة</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="color: var(--secondary-color); font-size: 1.5rem;">92%</h4>
+                            <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">متوسط الدرجات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="dashboard-sidebar">
+                <div class="announcements">
+                    <h3 style="margin-bottom: 20px;">آخر التنبيهات</h3>
+                    <div class="announcement-item">
+                        <span class="announcement-tag">هام</span>
+                        <span class="announcement-title">تم رفع مذكرة البلاغة الجديدة بصيغة PDF.</span>
+                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 5px;">منذ ساعتين</p>
+                    </div>
+                    <div class="announcement-item">
+                        <span class="announcement-tag"
+                            style="background: var(--primary-color); color: #fff;">تذكير</span>
+                        <span class="announcement-title">موعد الاختبار الشامل يوم الجمعة القادم.</span>
+                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 5px;">أمس</p>
+                    </div>
+                    <div class="announcement-item">
+                        <span class="announcement-tag" style="background: var(--accent-color); color: #fff;">جديد</span>
+                        <span class="announcement-title">فيديو حل أسئلة "التطبيقات والتدريبات" متاح الآن.</span>
+                        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 5px;">منذ 3 أيام</p>
+                    </div>
+                </div>
+
+                <div class="announcements"
+                    style="margin-top: 30px; background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);">
+                    <h3 style="margin-bottom: 15px;">تحتاج مساعدة؟</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 20px;">تواصل مع فريق الدعم الفني لمستر أحمد رمضان في أي
+                        وقت.</p>
+                    <a href="#" class="btn btn-outline" style="width: 100%;">تحدث معنا الآن</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
